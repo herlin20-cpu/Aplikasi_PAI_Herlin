@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Guru PAI Guru Kappung - SMP Negeri 3 Pulau Laut Selatan</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        emerald: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            600: '#059669',
+                            700: '#047857',
+                            800: '#065f46',
+                            900: '#064e3b',
+                            950: '#022c22',
+                        },
+                        amber: {
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #059669;
+            border-radius: 9999px;
+        }
+
+        /* Styles Specific to Printing */
+        @media print {
+            body {
+                background: white !important;
+                color: black !important;
+                font-size: 11pt;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .print-only {
+                display: block !important;
+            }
+            .print-page-break {
+                page-break-before: always;
+            }
+            .print-card {
+                box-shadow: none !important;
+                border: 1px solid #000 !important;
+                border-radius: 0 !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            table, th, td {
+                border: 1px solid #000 !important;
+                border-collapse: collapse !important;
+            }
+            th {
+                background-color: #f1f5f9 !important;
+                color: black !important;
+            }
+        }
+
+        .print-only {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 font-sans min-h-screen flex flex-col antialiased">
+
+    <!-- ==================== HEADER UNTUK PRINT (KOP SURAT RESMI) ==================== -->
+    <div class="print-only p-4 mb-6 border-b-4 border-double border-black text-center leading-tight">
+        <h3 class="text-sm font-bold uppercase tracking-widest">PEMERINTAH KABUPATEN KOTABARU</h3>
+        <h3 class="text-sm font-bold uppercase tracking-widest">DINAS PENDIDIKAN DAN KEBUDAYAAN</h3>
+        <h1 class="text-xl font-extrabold uppercase tracking-wide my-1" id="print-header-sekolah">UPTD SMP NEGERI 3 PULAU LAUT SELATAN</h1>
+        <p class="text-xs italic">Alamat: Kecamatan Pulau Laut Selatan, Kabupaten Kotabaru, Kalimantan Selatan</p>
+        <div class="border-t-2 border-black mt-2 pt-1 flex justify-between text-xs font-semibold">
+            <span>PERANGKAT ADMINISTRASI PAI & BP</span>
+            <span id="print-header-ta">TAHUN AJARAN 2024/2025</span>
+        </div>
+    </div>
+
+    <!-- ==================== TOP NAVIGATION BAR ==================== -->
+    <header class="bg-gradient-to-r from-emerald-900 via-teal-800 to-emerald-950 text-white shadow-lg no-print sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-3">
+                <div class="bg-amber-400/20 p-2.5 rounded-2xl border border-amber-400/30 backdrop-blur-md shadow-inner">
+                    <i class="fa-solid fa-mosque text-2xl text-amber-300"></i>
+                </div>
+                <div>
+                    <h1 class="text-lg md:text-xl font-extrabold tracking-wide text-white flex items-center gap-2">
+                        <span>Aplikasi Guru PAI Guru Kappung</span>
+                        <span class="text-xs bg-amber-400 text-slate-900 px-2 py-0.5 rounded-full font-bold uppercase shadow-sm">SMPN 3 PLS</span>
+                    </h1>
+                    <p class="text-xs text-emerald-200 font-medium flex items-center gap-1.5 mt-0.5">
+                        <span id="nav-nama-guru">Herlin, S.Pd.I</span>
+                        <span class="inline-block w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                        <span id="nav-nama-sekolah">SMP Negeri 3 Pulau Laut Selatan</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-2">
+                <button onclick="toggleModalProfil()" class="px-3.5 py-2 text-xs font-semibold rounded-xl bg-emerald-800/80 hover:bg-emerald-700 text-emerald-100 border border-emerald-600/40 transition flex items-center gap-2 shadow-sm">
+                    <i class="fa-solid fa-id-card text-amber-300"></i>
+                    <span class="hidden sm:inline">Profil Guru & Kasek</span>
+                </button>
+                <button onclick="window.print()" class="px-4 py-2 text-xs font-bold rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-900 shadow-md transition flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i>
+                    <span>Cetak Dokumentasi</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== MAIN CONTENT AREA ==================== -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-1 w-full grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+        <!-- SIDEBAR NAVIGATION (NO PRINT) -->
+        <aside class="lg:col-span-3 space-y-4 no-print">
+            
+            <!-- NAV MENU -->
+            <nav class="bg-white rounded-2xl p-3 shadow-sm border border-slate-200/80 space-y-1">
+                <div class="px-3 py-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Administrasi & Perangkat</div>
+
+                <button onclick="switchTab('dashboard')" id="nav-dashboard" class="tab-btn w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl font-medium text-xs transition bg-emerald-800 text-white shadow-sm">
+                    <i class="fa-solid fa-chart-pie w-4"></i>
+                    <span>Dashboard Guru</span>
+                </button>
+
+                <button onclick="switchTab('prota')" id="nav-prota" class="tab-btn w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl font-medium text-xs transition text-slate-600 hover:bg-slate-100 hover:text-emerald-800">
+                    <i class="fa-solid fa-calendar-days w-4"></i>
+                    <span>Program Tahunan (Prota)</span>
+                </button>
+
+                <button onclick="switchTab('promes')" id="nav-promes" class="tab-btn w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl font-medium text-xs transition text-slate-600 hover:bg-slate-100 hover:text-emerald-800">
+                    <i class="fa-solid fa-calendar-week w-4"></i>
+                    <span>Program Semester (Promes)</span>
+                </button>
+
+                <button onclick="switchTab('modul')" id="nav-modul" class="tab-btn w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl font-medium text-xs transition text-slate-600 hover:bg-slate-100 hover:text-emerald-800">
+                    <i class="fa-solid fa-book-open w-4"></i>
+                    <span>Modul Ajar & LKPD per BAB</span>
+                </button>
+
+                <button onclick="switchTab('ai-soal')" id="nav-ai-soal" class="tab-btn w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl font-medium text-xs transition text-slate-600 hover:bg-slate-100 hover:text-emerald-800">
+                    <i class="fa-solid fa-wand-magic-sparkles w-4 text-amber-500"></i>
+                    <span class="font-bold text-emerald-900">AI Generator Soal (Gemini)</span>
+                </button>
+
+                <button onclick="switchTab('penilaian')" id="nav-penilaian" class="tab-btn w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl font-medium text-xs transition text-slate-600 hover:bg-slate-100 hover:text-emerald-800">
+                    <i class="fa-solid fa-award w-4"></i>
+                    <span>Rekap & Leger Penilaian</span>
+                </button>
+            </nav>
+
+            <!-- SELECTOR KELAS & SEMESTER -->
+            <div class="bg-gradient-to-br from-emerald-900 to-teal-900 text-white rounded-2xl p-4 shadow-sm border border-emerald-800/50 space-y-3">
+                <h3 class="text-xs font-bold text-amber-300 uppercase tracking-wider flex items-center gap-1.5">
+                    <i class="fa-solid fa-sliders"></i> Filter Kelas & Semester
+                </h3>
+
+                <div>
+                    <label class="block text-[11px] text-emerald-200 mb-1">Pilih Kelas</label>
+                    <div class="grid grid-cols-3 gap-1.5">
+                        <button onclick="selectClass(7)" id="btn-kelas-7" class="kelas-btn py-1.5 rounded-lg text-xs font-bold transition bg-amber-400 text-slate-900 shadow">Kelas 7</button>
+                        <button onclick="selectClass(8)" id="btn-kelas-8" class="kelas-btn py-1.5 rounded-lg text-xs font-bold transition bg-emerald-800/80 text-emerald-100 hover:bg-emerald-700">Kelas 8</button>
+                        <button onclick="selectClass(9)" id="btn-kelas-9" class="kelas-btn py-1.5 rounded-lg text-xs font-bold transition bg-emerald-800/80 text-emerald-100 hover:bg-emerald-700">Kelas 9</button>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-[11px] text-emerald-200 mb-1">Pilih Semester</label>
+                    <div class="grid grid-cols-2 gap-1.5">
+                        <button onclick="selectSemester('Ganjil')" id="btn-sem-ganjil" class="sem-btn py-1.5 rounded-lg text-xs font-semibold transition bg-amber-400 text-slate-900 shadow">Ganjil</button>
+                        <button onclick="selectSemester('Genap')" id="btn-sem-genap" class="sem-btn py-1.5 rounded-lg text-xs font-semibold transition bg-emerald-800/80 text-emerald-100 hover:bg-emerald-700">Genap</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROFIL PANEL SINGKAT -->
+            <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 text-xs space-y-2">
+                <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+                    <span class="font-bold text-slate-700">Data Administrasi</span>
+                    <i class="fa-solid fa-school text-emerald-700"></i>
+                </div>
+                <p><span class="text-slate-400">Guru:</span> <span id="side-guru" class="font-semibold text-slate-800">Herlin, S.Pd.I</span></p>
+                <p><span class="text-slate-400">NIP:</span> <span id="side-nip-guru" class="text-slate-700">19912102024211017</span></p>
+                <p><span class="text-slate-400">Kepsek:</span> <span id="side-kepsek" class="font-semibold text-slate-800">Rahmawati, S.Pd.,M.AP.</span></p>
+                <p><span class="text-slate-400">NIP:</span> <span id="side-nip-kepsek" class="text-slate-700">197401012006042040</span></p>
+            </div>
+        </aside>
+
+        <!-- MAIN DISPLAY PANEL -->
+        <main class="lg:col-span-9 space-y-6">
+
+            <!-- TAB 1: DASHBOARD -->
+            <div id="tab-dashboard" class="tab-content space-y-6">
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 relative overflow-hidden">
+                    <div class="absolute -right-8 -bottom-8 w-44 h-44 bg-emerald-50 rounded-full blur-2xl pointer-events-none"></div>
+                    <div class="relative z-10 space-y-2">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold">
+                            <i class="fa-solid fa-circle-check"></i> Kurikulum Merdeka PAI SMP
+                        </div>
+                        <h2 class="text-2xl font-extrabold text-slate-800">
+                            Selamat Datang, <span id="dash-guru-nama">Herlin, S.Pd.I</span>!
+                        </h2>
+                        <p class="text-xs text-slate-600 leading-relaxed max-w-2xl">
+                            Aplikasi Administrasi dan Perangkat Ajar Pendidikan Agama Islam & Budi Pekerti (PAI & BP) Terpadu untuk SMP Negeri 3 Pulau Laut Selatan. Dilengkapi Generator Soal berbasis AI Gemini.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- STATS GRID -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-3">
+                        <div class="p-3 bg-emerald-100 text-emerald-700 rounded-xl">
+                            <i class="fa-solid fa-graduation-cap text-lg"></i>
+                        </div>
+                        <div>
+                            <p class="text-[11px] text-slate-400 font-medium">Tingkat Kelas</p>
+                            <p class="text-sm font-bold text-slate-800">Kelas 7, 8, & 9</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-3">
+                        <div class="p-3 bg-teal-100 text-teal-700 rounded-xl">
+                            <i class="fa-solid fa-book text-lg"></i>
+                        </div>
+                        <div>
+                            <p class="text-[11px] text-slate-400 font-medium">Total BAB Materi</p>
+                            <p class="text-sm font-bold text-slate-800">30 BAB PAI Lengkap</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-3">
+                        <div class="p-3 bg-amber-100 text-amber-700 rounded-xl">
+                            <i class="fa-solid fa-file-signature text-lg"></i>
+                        </div>
+                        <div>
+                            <p class="text-[11px] text-slate-400 font-medium">Modul Ajar & LKP</p>
+                            <p class="text-sm font-bold text-slate-800">Siap Cetak A4/F4</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-3">
+                        <div class="p-3 bg-indigo-100 text-indigo-700 rounded-xl">
+                            <i class="fa-solid fa-robot text-lg"></i>
+                        </div>
+                        <div>
+                            <p class="text-[11px] text-slate-400 font-medium">Generator AI</p>
+                            <p class="text-sm font-bold text-indigo-700">Gemini Integrated</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARDS KELAS -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+                        <div>
+                            <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-[11px] font-bold rounded-md">Kelas 7</span>
+                            <h3 className="font-bold text-slate-800 text-base mt-2">PAI Kelas 7 SMP</h3>
+                            <p class="text-xs text-slate-500 mt-1 leading-relaxed">10 BAB Kurikulum Merdeka mencakup Al-Qur'an Hadis, Aqidah, Akhlak, Fikih, dan SPI Umayyah/Andalus.</p>
+                        </div>
+                        <button onclick="selectClass(7); switchTab('modul');" class="w-full py-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1">
+                            <span>Buka Modul Kelas 7</span>
+                            <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                        </button>
+                    </div>
+
+                    <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+                        <div>
+                            <span class="px-2.5 py-1 bg-teal-100 text-teal-800 text-[11px] font-bold rounded-md">Kelas 8</span>
+                            <h3 class="font-bold text-slate-800 text-base mt-2">PAI Kelas 8 SMP</h3>
+                            <p class="text-xs text-slate-500 mt-1 leading-relaxed">10 BAB meliputi Pelestarian Alam, Kitab Allah, Berbakti & Janji, Shalat Sunnah, SPI Abbasiyah.</p>
+                        </div>
+                        <button onclick="selectClass(8); switchTab('modul');" class="w-full py-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1">
+                            <span>Buka Modul Kelas 8</span>
+                            <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                        </button>
+                    </div>
+
+                    <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+                        <div>
+                            <span class="px-2.5 py-1 bg-amber-100 text-amber-800 text-[11px] font-bold rounded-md">Kelas 9</span>
+                            <h3 class="font-bold text-slate-800 text-base mt-2">PAI Kelas 9 SMP</h3>
+                            <p class="text-xs text-slate-500 mt-1 leading-relaxed">10 BAB mencakup Hari Akhir, Etos Kerja, Qurban/Haji, Toleransi, Walisongo & Seni Nusantara.</p>
+                        </div>
+                        <button onclick="selectClass(9); switchTab('modul');" class="w-full py-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1">
+                            <span>Buka Modul Kelas 9</span>
+                            <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: PROGRAM TAHUNAN (PROTA) -->
+            <div id="tab-prota" class="tab-content hidden space-y-6">
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 print-card space-y-4">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-4 border-b border-slate-200 gap-2 no-print">
+                        <div>
+                            <h2 class="text-lg font-bold text-slate-800">Program Tahunan (PROTA)</h2>
+                            <p class="text-xs text-slate-500">Mata Pelajaran PAI & Budi Pekerti Kelas <span class="lbl-kelas">7</span> - Tahun Ajaran <span class="lbl-ta">2024/2025</span></p>
+                        </div>
+                        <button onclick="window.print()" class="px-3.5 py-1.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-print"></i> Cetak Prota
+                        </button>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-xs text-left border-collapse border border-slate-300">
+                            <thead>
+                                <tr class="bg-emerald-800 text-white text-center">
+                                    <th class="border border-slate-300 px-3 py-2 w-12">BAB</th>
+                                    <th class="border border-slate-300 px-3 py-2">Judul BAB & Alokasi Al-Qur'an / Pokok Bahasan</th>
+                                    <th class="border border-slate-300 px-3 py-2 w-16">JP</th>
+                                    <th class="border border-slate-300 px-3 py-2">Tujuan Pembelajaran (TP)</th>
+                                    <th class="border border-slate-300 px-3 py-2 w-24">Semester</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-prota-body">
+                                <!-- Dynamic Rendered -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- SIGNATURE BLOCK -->
+                    <div class="grid grid-cols-2 gap-8 pt-8 text-center text-xs text-slate-900 font-sans">
+                        <div>
+                            <p>Mengetahui,</p>
+                            <p class="font-bold">Kepala Sekolah</p>
+                            <div class="h-16"></div>
+                            <p class="font-bold underline sig-kepsek">Rahmawati, S.Pd.,M.AP.</p>
+                            <p>NIP. <span class="sig-nip-kepsek">197401012006042040</span></p>
+                        </div>
+                        <div>
+                            <p>Pulau Laut Selatan, <span class="sig-tanggal">28 Oktober 2026</span></p>
+                            <p class="font-bold">Guru Mata Pelajaran PAI</p>
+                            <div class="h-16"></div>
+                            <p class="font-bold underline sig-guru">Herlin, S.Pd.I</p>
+                            <p>NIP. <span class="sig-nip-guru">19912102024211017</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: PROGRAM SEMESTER (PROMES) -->
+            <div id="tab-promes" class="tab-content hidden space-y-6">
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 print-card space-y-4">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-4 border-b border-slate-200 gap-2 no-print">
+                        <div>
+                            <h2 class="text-lg font-bold text-slate-800">Program Semester (PROMES)</h2>
+                            <p class="text-xs text-slate-500">PAI Kelas <span class="lbl-kelas">7</span> - Semester <span class="lbl-sem">Ganjil</span> (<span class="lbl-ta">2024/2025</span>)</p>
+                        </div>
+                        <button onclick="window.print()" class="px-3.5 py-1.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-print"></i> Cetak Promes
+                        </button>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-xs text-left border-collapse border border-slate-300">
+                            <thead>
+                                <tr class="bg-emerald-800 text-white text-center">
+                                    <th className="border border-slate-300 px-2 py-2 w-10">No</th>
+                                    <th className="border border-slate-300 px-3 py-2">Materi / Bab Pembelajaran</th>
+                                    <th className="border border-slate-300 px-2 py-2 w-12">JP</th>
+                                    <th className="border border-slate-300 px-2 py-2">Bulan 1</th>
+                                    <th className="border border-slate-300 px-2 py-2">Bulan 2</th>
+                                    <th className="border border-slate-300 px-2 py-2">Bulan 3</th>
+                                    <th className="border border-slate-300 px-2 py-2">Bulan 4</th>
+                                    <th className="border border-slate-300 px-2 py-2">Bulan 5</th>
+                                    <th className="border border-slate-300 px-2 py-2">Bulan 6</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-promes-body">
+                                <!-- Dynamic Rendered -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- SIGNATURE BLOCK -->
+                    <div class="grid grid-cols-2 gap-8 pt-8 text-center text-xs text-slate-900 font-sans">
+                        <div>
+                            <p>Mengetahui,</p>
+                            <p class="font-bold">Kepala UPTD SMPN 3 Pulau Laut Selatan</p>
+                            <div class="h-16"></div>
+                            <p class="font-bold underline sig-kepsek">Rahmawati, S.Pd.,M.AP.</p>
+                            <p>NIP. <span class="sig-nip-kepsek">197401012006042040</span></p>
+                        </div>
+                        <div>
+                            <p>Pulau Laut Selatan, <span class="sig-tanggal">28 Oktober 2026</span></p>
+                            <p class="font-bold">Guru Mata Pelajaran PAI</p>
+                            <div class="h-16"></div>
+                            <p class="font-bold underline sig-guru">Herlin, S.Pd.I</p>
+                            <p>NIP. <span class="sig-nip-guru">19912102024211017</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 4: MODUL AJAR & LKPD PER BAB -->
+            <div id="tab-modul" class="tab-content hidden space-y-6">
+                
+                <!-- SELECTOR BAB (NO PRINT) -->
+                <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 no-print space-y-3">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                            Pilih BAB Mata Pelajaran (Kelas <span class="lbl-kelas">7</span>)
+                        </h3>
+                        <button onclick="window.print()" class="px-3 py-1.5 bg-emerald-700 text-white rounded-lg text-xs font-bold flex items-center gap-1.5">
+                            <i class="fa-solid fa-print"></i> Cetak Modul & LKP
+                        </button>
+                    </div>
+
+                    <div id="bab-buttons-list" class="flex gap-2 overflow-x-auto pb-2">
+                        <!-- Dynamic BAB Buttons -->
+                    </div>
+                </div>
+
+                <!-- DISPLAY MODUL & LKPD -->
+                <div class="space-y-6">
+                    <!-- MODUL AJAR CONTAINER -->
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 print-card space-y-5">
+                        <div class="border-b border-slate-200 pb-3 flex justify-between items-start">
+                            <div>
+                                <span class="px-2.5 py-1 bg-amber-100 text-amber-800 text-[11px] font-bold rounded">
+                                    MODUL AJAR KURIKULUM MERDEKA
+                                </span>
+                                <h2 class="text-xl font-bold text-slate-800 mt-2" id="modul-judul-bab">
+                                    BAB 1: Al-Qur'an dan Hadis
+                                </h2>
+                                <p class="text-xs text-slate-500">Kelas <span class="lbl-kelas">7</span> SMP | Alokasi Waktu: <span id="modul-jp">12</span> JP</p>
+                            </div>
+                        </div>
+
+                        <!-- IDENTITAS MODUL -->
+                        <div class="space-y-2">
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50 p-2 rounded">
+                                I. Identitas Modul & Informasi Umum
+                            </h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
+                                <div class="p-2 bg-slate-50 rounded border border-slate-100"><span class="font-bold">Nama Penyusun:</span> <span class="sig-guru">Herlin, S.Pd.I</span></div>
+                                <div class="p-2 bg-slate-50 rounded border border-slate-100"><span class="font-bold">Satuan Pendidikan:</span> <span id="modul-sekolah">SMP Negeri 3 Pulau Laut Selatan</span></div>
+                                <div class="p-2 bg-slate-50 rounded border border-slate-100"><span class="font-bold">Profil Pelajar Pancasila:</span> Beriman, Bertaqwa, Berakhlak Mulia, Bernalar Kritis, Gotong Royong</div>
+                                <div class="p-2 bg-slate-50 rounded border border-slate-100"><span class="font-bold">Sarana & Prasarana:</span> Musholla/Kelas, Mushaf Al-Qur'an, Proyektor/LCD, Buku PAI SMP</div>
+                            </div>
+                        </div>
+
+                        <!-- KOMPONEN INTI -->
+                        <div class="space-y-2 text-xs text-slate-700">
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50 p-2 rounded">
+                                II. Komponen Inti & Langkah Pembelajaran
+                            </h4>
+                            <p><span class="font-bold text-slate-900">Tujuan Pembelajaran (TP):</span> <span id="modul-tp">Membaca, menghafal, dan memahami kandungan ayat Al-Qur'an dan Hadis.</span></p>
+                            <p><span class="font-bold text-slate-900">Pemahaman Bermakna:</span> Menjadikan nilai-nilai Islam sebagai pedoman utama dalam sikap dan perilaku bermasyarakat.</p>
+                            
+                            <div class="border-l-2 border-emerald-600 pl-3 space-y-1.5 mt-2">
+                                <p class="font-bold text-slate-800">Kegiatan Pembelajaran (Model Discovery Learning):</p>
+                                <p><strong>1. Pendahuluan (15 Menit):</strong> Salam, pembacaan ayat suci Al-Qur'an, penjelasan tujuan pembelajaran & pertanyaan pemantik.</p>
+                                <p><strong>2. Kegiatan Inti (90 Menit):</strong> Mengamati bahan tayang/bacaan, diskusi kelompok memecahkan masalah, penyusunan hasil analisis, dan presentasi kelompok.</p>
+                                <p><strong>3. Penutup (15 Menit):</strong> Kesimpulan bersama, refleksi diri Rahmatan Lil 'Alamin, arahan tugas mandiri LKP, dan doa penutup.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- LKPD / LKP CONTAINER -->
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border-2 border-amber-400 print-card space-y-4">
+                        <div class="flex justify-between items-center border-b border-amber-200 pb-3">
+                            <div>
+                                <span class="px-2.5 py-1 bg-amber-400 text-slate-900 text-xs font-extrabold rounded uppercase">
+                                    LEMBAR KERJA PESERTA DIDIK (LKPD) / LKP
+                                </span>
+                                <h3 class="text-base font-bold text-slate-800 mt-1" id="lkp-judul-bab">
+                                    LKP BAB 1: Al-Qur'an dan Hadis
+                                </h3>
+                            </div>
+                            <span class="text-xs font-bold text-slate-500">Kelas <span class="lbl-kelas">7</span></span>
+                        </div>
+
+                        <!-- ISIAN IDENTITAS SISWA -->
+                        <div class="grid grid-cols-2 gap-4 text-xs bg-amber-50/60 p-3 rounded-lg border border-amber-200">
+                            <div>
+                                <p><span class="font-bold">Nama Siswa:</span> ...........................................................</p>
+                                <p class="mt-2"><span class="font-bold">Kelas / No. Absen:</span> ...........................................................</p>
+                            </div>
+                            <div>
+                                <p><span class="font-bold">Hari / Tanggal:</span> ...........................................................</p>
+                                <p class="mt-2"><span class="font-bold">Nilai / Skor:</span> ......................... / 100</p>
+                            </div>
+                        </div>
+
+                        <!-- TUGAS / PERTANYAAN LKPD -->
+                        <div class="space-y-4 text-xs text-slate-800">
+                            <h4 class="font-bold text-slate-900 underline">Instruksi & Lembar Penugasan:</h4>
+                            
+                            <div class="space-y-1">
+                                <p class="font-semibold">1. Penelusuran & Rangkuman Pemahaman:</p>
+                                <p class="text-slate-500 italic">Tuliskan ringkasan pemahaman Anda mengenai topik utama bab ini beserta dalil Al-Qur'an / Hadis yang mendasarinya!</p>
+                                <div class="border border-slate-300 rounded h-24 bg-slate-50 p-2"></div>
+                            </div>
+
+                            <div class="space-y-1">
+                                <p class="font-semibold">2. Aplikasi Sifat & Studi Kasus:</p>
+                                <p class="text-slate-500 italic">Bagaimana bentuk penerapan nyata dari materi bab ini di lingkungan SMP Negeri 3 Pulau Laut Selatan?</p>
+                                <div class="border border-slate-300 rounded h-28 bg-slate-50 p-2"></div>
+                            </div>
+                        </div>
+
+                        <!-- SIGNATURE BLOCK -->
+                        <div class="grid grid-cols-2 gap-8 pt-8 text-center text-xs text-slate-900 font-sans">
+                            <div>
+                                <p>Mengetahui,</p>
+                                <p class="font-bold">Kepala Sekolah</p>
+                                <div class="h-16"></div>
+                                <p class="font-bold underline sig-kepsek">Rahmawati, S.Pd.,M.AP.</p>
+                                <p>NIP. <span class="sig-nip-kepsek">197401012006042040</span></p>
+                            </div>
+                            <div>
+                                <p>Pulau Laut Selatan, <span class="sig-tanggal">28 Oktober 2026</span></p>
+                                <p class="font-bold">Guru Pengampu PAI</p>
+                                <div class="h-16"></div>
+                                <p class="font-bold underline sig-guru">Herlin, S.Pd.I</p>
+                                <p>NIP. <span class="sig-nip-guru">19912102024211017</span></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- TAB 5: AI GENERATOR SOAL (GEMINI INTEGRATION) -->
+            <div id="tab-ai-soal" class="tab-content hidden space-y-6">
+                
+                <div class="bg-gradient-to-r from-emerald-900 via-teal-900 to-emerald-950 text-white rounded-2xl p-6 shadow-md space-y-4 no-print">
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-wand-magic-sparkles text-amber-300 text-xl animate-bounce"></i>
+                        <h2 class="text-lg font-bold">Pembuat Soal Ulangan Harian AI (Gemini)</h2>
+                    </div>
+                    <p class="text-xs text-emerald-200">
+                        Buat naskah Ulangan Harian, PTS, atau PAS otomatis beserta Kunci Jawaban & Rubrik Penilaian menggunakan AI Gemini.
+                    </p>
+
+                    <!-- INPUT FORM -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-2">
+                        <div>
+                            <label class="block text-[11px] font-semibold text-emerald-300 mb-1">Topik / BAB Materi</label>
+                            <input type="text" id="ai-input-topik" class="w-full bg-emerald-950/80 border border-emerald-700 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-amber-400" value="BAB 1 PAI Kelas 7">
+                        </div>
+
+                        <div>
+                            <label class="block text-[11px] font-semibold text-emerald-300 mb-1">Jumlah Pilihan Ganda</label>
+                            <input type="number" id="ai-input-pg" class="w-full bg-emerald-950/80 border border-emerald-700 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-amber-400" value="5">
+                        </div>
+
+                        <div>
+                            <label class="block text-[11px] font-semibold text-emerald-300 mb-1">Jumlah Soal Essay</label>
+                            <input type="number" id="ai-input-essay" class="w-full bg-emerald-950/80 border border-emerald-700 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-amber-400" value="2">
+                        </div>
+
+                        <div>
+                            <label class="block text-[11px] font-semibold text-emerald-300 mb-1">Tingkat Kesulitan</label>
+                            <select id="ai-input-tingkat" class="w-full bg-emerald-950/80 border border-emerald-700 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-amber-400">
+                                <option value="Sedang (LOTS/HOTS Balance)">Sedang (LOTS/HOTS Balance)</option>
+                                <option value="Mudah (LOTS)">Mudah (LOTS)</option>
+                                <option value="Sangat HOTS (High Order Thinking)">Sangat HOTS (High Order Thinking)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end pt-2">
+                        <button onclick="generateExamWithGemini()" id="btn-generate-ai" class="px-5 py-2.5 bg-amber-400 hover:bg-amber-300 text-slate-900 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-sm">
+                            <i class="fa-solid fa-sparkles"></i>
+                            <span>Generate Naskah Soal Dengan Gemini</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- AI OUTPUT DISPLAY -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 print-card space-y-4">
+                    <div class="flex justify-between items-center border-b border-slate-200 pb-3 no-print">
+                        <h3 class="text-sm font-bold text-slate-800 flex items-center gap-2">
+                            <i class="fa-solid fa-file-lines text-emerald-700"></i>
+                            <span>Naskah Soal & Kunci Jawaban Siap Cetak</span>
+                        </h3>
+                        <button onclick="window.print()" class="px-3.5 py-1.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-print"></i> Cetak Soal
+                        </button>
+                    </div>
+
+                    <div id="ai-soal-output" class="bg-slate-50 p-6 rounded-xl border border-slate-200 text-xs font-mono whitespace-pre-wrap leading-relaxed text-slate-800">
+                        Klik tombol "Generate Naskah Soal Dengan Gemini" di atas untuk membuat naskah soal Ulangan Harian secara otomatis.
+                    </div>
+
+                    <!-- SIGNATURE BLOCK -->
+                    <div class="grid grid-cols-2 gap-8 pt-8 text-center text-xs text-slate-900 font-sans">
+                        <div>
+                            <p>Mengetahui,</p>
+                            <p class="font-bold">Kepala Sekolah</p>
+                            <div class="h-16"></div>
+                            <p class="font-bold underline sig-kepsek">Rahmawati, S.Pd.,M.AP.</p>
+                            <p>NIP. <span class="sig-nip-kepsek">197401012006042040</span></p>
+                        </div>
+                        <div>
+                            <p>Pulau Laut Selatan, <span class="sig-tanggal">28 Oktober 2026</span></p>
+                            <p class="font-bold">Guru Pengampu PAI</p>
+                            <div class="h-16"></div>
+                            <p class="font-bold underline sig-guru">Herlin, S.Pd.I</p>
+                            <p>NIP. <span class="sig-nip-guru">19912102024211017</span></p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- TAB 6: REKAP PENILAIAN -->
+            <div id="tab-penilaian" class="tab-content hidden space-y-6">
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 print-card space-y-4">
+                    <div class="flex justify-between items-center border-b border-slate-200 pb-4 no-print">
+                        <div>
+                            <h2 class="text-lg font-bold text-slate-800">Rekap Penilaian & Leger Nilai PAI</h2>
+                            <p class="text-xs text-slate-500">Kelas <span class="lbl-kelas">7</span> - UPTD SMP Negeri 3 Pulau Laut Selatan</p>
+                        </div>
+                        <button onclick="window.print()" class="px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-print"></i> Cetak Leger Nilai
+                        </button>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-xs text-left border-collapse border border-slate-300">
+                            <thead>
+                                <tr class="bg-emerald-800 text-white text-center">
+                                    <th class="border border-slate-300 px-2 py-2 w-10">No</th>
+                                    <th class="border border-slate-300 px-3 py-2 w-24">NIS</th>
+                                    <th class="border border-slate-300 px-3 py-2">Nama Siswa</th>
+                                    <th class="border border-slate-300 px-2 py-2 w-20">Sikap (20%)</th>
+                                    <th class="border border-slate-300 px-2 py-2 w-20">UH (30%)</th>
+                                    <th class="border border-slate-300 px-2 py-2 w-20">Tugas (25%)</th>
+                                    <th class="border border-slate-300 px-2 py-2 w-20">Praktik (25%)</th>
+                                    <th class="border border-slate-300 px-3 py-2 w-24">Nilai Rapor</th>
+                                    <th class="border border-slate-300 px-3 py-2 w-28">Predikat</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-nilai-body">
+                                <!-- Dynamic Rendered -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- SIGNATURE BLOCK -->
+                    <div class="grid grid-cols-2 gap-8 pt-8 text-center text-xs text-slate-900 font-sans">
+                        <div>
+                            <p>Mengetahui,</p>
+                            <p class="font-bold">Kepala Sekolah</p>
+                            <div class="h-16"></div>
+                            <p class="font-bold underline sig-kepsek">Rahmawati, S.Pd.,M.AP.</p>
+                            <p>NIP. <span class="sig-nip-kepsek">197401012006042040</span></p>
+                        </div>
+                        <div>
+                            <p>Pulau Laut Selatan, <span class="sig-tanggal">28 Oktober 2026</span></p>
+                            <p class="font-bold">Guru Pengampu PAI</p>
+                            <div class="h-16"></div>
+                            <p class="font-bold underline sig-guru">Herlin, S.Pd.I</p>
+                            <p>NIP. <span class="sig-nip-guru">19912102024211017</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- ==================== MODAL PROFIL GURU & KASEK ==================== -->
+    <div id="modal-profil" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center hidden no-print">
+        <div class="bg-white rounded-2xl p-6 max-w-lg w-full shadow-xl space-y-4 m-4 border border-slate-200">
+            <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-id-card text-emerald-700"></i> Pengaturan Data Profil Guru & Kasek
+                </h3>
+                <button onclick="toggleModalProfil()" class="text-slate-400 hover:text-slate-600 text-sm">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="space-y-3 text-xs">
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">Nama Guru PAI</label>
+                    <input type="text" id="input-guru" class="w-full border border-slate-300 rounded-lg px-3 py-1.5 focus:outline-none focus:border-emerald-600">
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">NIP Guru</label>
+                    <input type="text" id="input-nip-guru" class="w-full border border-slate-300 rounded-lg px-3 py-1.5 focus:outline-none focus:border-emerald-600">
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">Nama Kepala Sekolah</label>
+                    <input type="text" id="input-kepsek" class="w-full border border-slate-300 rounded-lg px-3 py-1.5 focus:outline-none focus:border-emerald-600">
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">NIP Kepala Sekolah</label>
+                    <input type="text" id="input-nip-kepsek" class="w-full border border-slate-300 rounded-lg px-3 py-1.5 focus:outline-none focus:border-emerald-600">
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">Nama Sekolah</label>
+                    <input type="text" id="input-sekolah" class="w-full border border-slate-300 rounded-lg px-3 py-1.5 focus:outline-none focus:border-emerald-600">
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">Tahun Ajaran</label>
+                    <input type="text" id="input-ta" class="w-full border border-slate-300 rounded-lg px-3 py-1.5 focus:outline-none focus:border-emerald-600">
+                </div>
+            </div>
+
+            <div class="flex justify-end space-x-2 pt-2 border-t border-slate-100">
+                <button onclick="toggleModalProfil()" class="px-3.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold">Batal</button>
+                <button onclick="saveProfileData()" class="px-4 py-1.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded-lg text-xs font-bold">Simpan Profil</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-slate-400 text-[11px] py-4 px-6 text-center border-t border-slate-800 no-print mt-auto">
+        <p>© 2026 Aplikasi Guru PAI Guru Kappung - UPTD SMP Negeri 3 Pulau Laut Selatan. Powered by Gemini AI.</p>
+    </footer>
+
+    <!-- ==================== JAVASCRIPT LOGIC ==================== -->
+    <script>
+        // GLOBAL TEACHER PROFILE STATE
+        let profile = {
+            guru: "Herlin, S.Pd.I",
+            nipGuru: "19912102024211017",
+            kepsek: "Rahmawati, S.Pd.,M.AP.",
+            nipKepsek: "197401012006042040",
+            sekolah: "SMP Negeri 3 Pulau Laut Selatan",
+            ta: "2024/2025"
+        };
+
+        // CURRICULUM DATA PAI SMP KELAS 7, 8, 9
+        const paiCurriculum = {
+            7: [
+                { bab: 1, judul: "Al-Qur'an dan Hadis: Meneladani Al-Qur'an dan Hadis Nabi", jp: 12, sem: "Ganjil", tp: "Membaca, menghafal, dan memahami kandungan ayat Al-Qur'an dan Hadis tentang ilmu dan kebaikan." },
+                { bab: 2, judul: "Meneladani Nama dan Sifat Allah untuk Kebaikan Hidup (Asmaul Husna)", jp: 12, sem: "Ganjil", tp: "Memahami Asmaulhusna al-Alim, al-Khabir, as-Sami', al-Bashir dan penerapannya." },
+                { bab: 3, judul: "Menghadirkan Salat dan Zikir dalam Kehidupan", jp: 15, sem: "Ganjil", tp: "Memahami tata cara salat fardhu dan zikir serta mempraktikkannya secara teratur." },
+                { bab: 4, judul: "Mengagungkan Allah SWT dengan Tunduk Pada Perintah-Nya (Sujud Sahwi, Tilawah, Syukur)", jp: 12, sem: "Ganjil", tp: "Memahami ketentuan dan tata cara sujud sahwi, sujud tilawah, dan sujud syukur." },
+                { bab: 5, judul: "Damai Negeriku: Sejarah Peradaban Islam Masa Daulah Umayyah", jp: 12, sem: "Ganjil", tp: "Menganalisis sejarah perkembangan Islam masa Daulah Umayyah di Makkah & Damaskus." },
+                { bab: 6, judul: "Alam Semesta Sebagai Tanda Kekuasaan Allah SWT", jp: 12, sem: "Genap", tp: "Memahami ayat Al-Qur'an tentang kelestarian alam dan keagungan penciptaan Allah." },
+                { bab: 7, judul: "Mawas Diri dan Introspeksi Diri dalam Ketaatan Beragama", jp: 12, sem: "Genap", tp: "Memahami iman kepada Malaikat-Malaikat Allah Swt dan meneladani ketaatannya." },
+                { bab: 8, judul: "Menghindari Ghibah dan Melaksanakan Tabayyun", jp: 12, sem: "Genap", tp: "Memahami bahaya ghibah dan pentingnya tabayyun dalam menyikapi berita." },
+                { bab: 9, judul: "Meneladani Nabi Muhammad SAW Mendidik Karakter Terpuji", jp: 12, sem: "Genap", tp: "Menganalisis perjuangan dakwah Rasulullah Saw periode Madinah." },
+                { bab: 10, judul: "Andalus: Meneladani Kejayaan Islam di Andalusia", jp: 12, sem: "Genap", tp: "Menganalisis keemasan kebudayaan dan sains Islam di Andalusia (Spanyol)." }
+            ],
+            8: [
+                { bab: 1, judul: "Inspirasi Al-Qur'an: Melestarikan Alam, Menjaga Kehidupan", jp: 12, sem: "Ganjil", tp: "Membaca dan menganalisis Q.S. ar-Rum/30: 41 dan Q.S. Ibrahim/14: 32 tentang alam." },
+                { bab: 2, judul: "Meyakini Kitab-Kitab Allah: Menjadi Generasi Pecinta Al-Qur'an", jp: 12, sem: "Ganjil", tp: "Memahami iman kepada Kitab-Kitab Allah Swt dan penerapannya dalam kehidupan." },
+                { bab: 3, judul: "Menjadi Pribadi Integritas dengan Memenuhi Janji, Berbakti kepada Orang Tua dan Guru", jp: 12, sem: "Ganjil", tp: "Memahami pentingnya wafa' bil 'ahdi, birrul walidain, dan menghormati guru." },
+                { bab: 4, judul: "Ibadah dengan Disiplin dan Penuh Harap Kepada Allah SWT (Salat Gerhana, Istisqa, Jenazah)", jp: 15, sem: "Ganjil", tp: "Mempraktikkan salat sunnah gerhana, istisqa, dan pengurusan jenazah." },
+                { bab: 5, judul: "Meneladani Kebudayaan pada Masa Daulah Abbasiyah", jp: 12, sem: "Ganjil", tp: "Menganalisis sejarah pertumbuhan ilmu pengetahuan masa Daulah Abbasiyah." },
+                { bab: 6, judul: "Mengagungkan Allah SWT Melalui Syariat Puasa dan Zakat", jp: 12, sem: "Genap", tp: "Memahami ketentuan puasa wajib/sunnah serta zakat fitrah dan zakat mal." },
+                { bab: 7, judul: "Beriman kepada Rasul-Rasul Allah: Menjadi Generasi Teladan", jp: 12, sem: "Genap", tp: "Memahami sifat wajib, mustahil, dan jaiz bagi Rasul Allah Swt." },
+                { bab: 8, judul: "Menghindari Sikap Boros dan Menumbuhkan Sikap Hidup Sederhana", jp: 12, sem: "Genap", tp: "Memahami konsep israf dan tabdzir serta membiasakan hidup bersahaja." },
+                { bab: 9, judul: "Meneladani Tokoh-Tokoh Muslim Terkemuka Masa Daulah Abbasiyah", jp: 12, sem: "Genap", tp: "Meneladani keilmuan Ibnu Sina, Al-Khawarizmi, dan Al-Ghazali." },
+                { bab: 10, judul: "Menjadi Generasi Berprestasi dengan Cinta Ilmu Pengetahuan", jp: 12, sem: "Genap", tp: "Menumbuhkan etos belajar dan menyukai literasi sains serta agama." }
+            ],
+            9: [
+                { bab: 1, judul: "Al-Qur'an Inspirasi Hidup Sehat dan Berkah", jp: 12, sem: "Ganjil", tp: "Menganalisis Q.S. An-Nahl/16: 67-69 tentang pola makan dan kesehatan." },
+                { bab: 2, judul: "Meyakini Hari Akhir dengan Mawas Diri dan Menjaga Perilaku Terpuji", jp: 12, sem: "Ganjil", tp: "Memahami tahapan Hari Akhir dan menumbuhkan kesadaran beramal saleh." },
+                { bab: 3, judul: "Dahsyatnya Potensi Diri dengan Etos Kerja, Pantang Menyerah, dan Tawakal", jp: 12, sem: "Ganjil", tp: "Memahami pentingnya etos kerja keras dan sikap tawakal kepada Allah Swt." },
+                { bab: 4, judul: "Menggapai Keberkahan Hidup Melalui Ibadah Haji, Umrah, dan Qurban", jp: 15, sem: "Ganjil", tp: "Memahami ketentuan dan memperagakan tata cara haji, umrah, dan penyembelihan qurban." },
+                { bab: 5, judul: "Meneladani Sejarah Peradaban Islam pada Masa Daulah Utsmaniyah", jp: 12, sem: "Ganjil", tp: "Menganalisis kejayaan Daulah Utsmaniyah dan penaklukan Konstantinopel." },
+                { bab: 6, judul: "Menatap Masa Depan dengan Qada dan Qadar Allah SWT", jp: 12, sem: "Genap", tp: "Memahami takdir mu'allaq dan mubram serta menumbuhkan optimisme." },
+                { bab: 7, judul: "Merawat Toleransi dan Kerukunan Beragama dalam Kehidupan Bermasyarakat", jp: 12, sem: "Genap", tp: "Memahami konsep moderasi beragama dan Wasathiyah Islam." },
+                { bab: 8, judul: "Etika Berkomunikasi di Media Sosial Menurut Pandangan Islam", jp: 12, sem: "Genap", tp: "Menerapkan etika tabayyun dan menghormati sesama di dunia digital." },
+                { bab: 9, judul: "Meneladani Perjuangan Walisongo dalam Menyiarkan Islam di Nusantara", jp: 12, sem: "Genap", tp: "Menganalisis strategi dakwah akomodatif Wali Songo di Tanah Jawa." },
+                { bab: 10, judul: "Melestarikan Budaya dan Seni Islami Nusantara", jp: 12, sem: "Genap", tp: "Menghargai tradisi Sekaten, Grebeg, dan seni ukir Islami Nusantara." }
+            ]
+        };
+
+        // STUDENT GRADES SAMPLE
+        let studentGrades = [
+            { nis: "1001", nama: "Ahmad Rizky", sikap: 88, uh: 85, tugas: 90, praktik: 87 },
+            { nis: "1002", nama: "Siti Nurhaliza", sikap: 95, uh: 92, tugas: 94, praktik: 90 },
+            { nis: "1003", nama: "Budi Santoso", sikap: 80, uh: 78, tugas: 82, praktik: 80 },
+            { nis: "1004", nama: "Dewi Anggraini", sikap: 90, uh: 88, tugas: 90, praktik: 92 },
+            { nis: "1005", nama: "Muhammad Fikri", sikap: 85, uh: 80, tugas: 85, praktik: 84 }
+        ];
+
+        let selectedClass = 7;
+        let selectedSemester = "Ganjil";
+        let selectedBab = 1;
+
+        // INITIALIZATION
+        window.onload = function() {
+            updateProfileUI();
+            renderProtaTable();
+            renderPromesTable();
+            renderBabButtons();
+            renderModulAndLkp();
+            renderPenilaianTable();
+        };
+
+        // UI SWITCHERS
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById('tab-' + tabName).classList.remove('hidden');
+
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-emerald-800', 'text-white', 'shadow-sm');
+                btn.classList.add('text-slate-600');
+            });
+            const activeBtn = document.getElementById('nav-' + tabName);
+            if(activeBtn) {
+                activeBtn.classList.add('bg-emerald-800', 'text-white', 'shadow-sm');
+                activeBtn.classList.remove('text-slate-600');
+            }
+        }
+
+        function selectClass(k) {
+            selectedClass = k;
+            selectedBab = 1;
+
+            document.querySelectorAll('.kelas-btn').forEach(b => {
+                b.classList.remove('bg-amber-400', 'text-slate-900', 'shadow');
+                b.classList.add('bg-emerald-800/80', 'text-emerald-100');
+            });
+            const selectedBtn = document.getElementById('btn-kelas-' + k);
+            if(selectedBtn) {
+                selectedBtn.classList.add('bg-amber-400', 'text-slate-900', 'shadow');
+                selectedBtn.classList.remove('bg-emerald-800/80', 'text-emerald-100');
+            }
+
+            document.querySelectorAll('.lbl-kelas').forEach(el => el.innerText = k);
+            
+            renderProtaTable();
+            renderPromesTable();
+            renderBabButtons();
+            renderModulAndLkp();
+            renderPenilaianTable();
+        }
+
+        function selectSemester(sem) {
+            selectedSemester = sem;
+
+            document.querySelectorAll('.sem-btn').forEach(b => {
+                b.classList.remove('bg-amber-400', 'text-slate-900', 'shadow');
+                b.classList.add('bg-emerald-800/80', 'text-emerald-100');
+            });
+            const selectedBtn = document.getElementById('btn-sem-' + sem.toLowerCase());
+            if(selectedBtn) {
+                selectedBtn.classList.add('bg-amber-400', 'text-slate-900', 'shadow');
+                selectedBtn.classList.remove('bg-emerald-800/80', 'text-emerald-100');
+            }
+
+            document.querySelectorAll('.lbl-sem').forEach(el => el.innerText = sem);
+
+            renderProtaTable();
+            renderPromesTable();
+            renderModulAndLkp();
+        }
+
+        // PROFILE MODAL FUNCTIONS
+        function toggleModalProfil() {
+            const m = document.getElementById('modal-profil');
+            if (m.classList.contains('hidden')) {
+                document.getElementById('input-guru').value = profile.guru;
+                document.getElementById('input-nip-guru').value = profile.nipGuru;
+                document.getElementById('input-kepsek').value = profile.kepsek;
+                document.getElementById('input-nip-kepsek').value = profile.nipKepsek;
+                document.getElementById('input-sekolah').value = profile.sekolah;
+                document.getElementById('input-ta').value = profile.ta;
+                m.classList.remove('hidden');
+            } else {
+                m.classList.add('hidden');
+            }
+        }
+
+        function saveProfileData() {
+            profile.guru = document.getElementById('input-guru').value;
+            profile.nipGuru = document.getElementById('input-nip-guru').value;
+            profile.kepsek = document.getElementById('input-kepsek').value;
+            profile.nipKepsek = document.getElementById('input-nip-kepsek').value;
+            profile.sekolah = document.getElementById('input-sekolah').value;
+            profile.ta = document.getElementById('input-ta').value;
+
+            updateProfileUI();
+            toggleModalProfil();
+        }
+
+        function updateProfileUI() {
+            document.getElementById('nav-nama-guru').innerText = profile.guru;
+            document.getElementById('nav-nama-sekolah').innerText = profile.sekolah;
+            document.getElementById('dash-guru-nama').innerText = profile.guru;
+
+            document.getElementById('side-guru').innerText = profile.guru;
+            document.getElementById('side-nip-guru').innerText = profile.nipGuru;
+            document.getElementById('side-kepsek').innerText = profile.kepsek;
+            document.getElementById('side-nip-kepsek').innerText = profile.nipKepsek;
+
+            document.getElementById('print-header-sekolah').innerText = profile.sekolah.toUpperCase();
+            document.getElementById('print-header-ta').innerText = "TAHUN AJARAN " + profile.ta;
+
+            document.querySelectorAll('.lbl-ta').forEach(e => e.innerText = profile.ta);
+            document.querySelectorAll('.sig-guru').forEach(e => e.innerText = profile.guru);
+            document.querySelectorAll('.sig-nip-guru').forEach(e => e.innerText = profile.nipGuru);
+            document.querySelectorAll('.sig-kepsek').forEach(e => e.innerText = profile.kepsek);
+            document.querySelectorAll('.sig-nip-kepsek').forEach(e => e.innerText = profile.nipKepsek);
+            document.querySelectorAll('.sig-tanggal').forEach(e => e.innerText = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }));
+        }
+
+        // RENDER PROTA
+        function renderProtaTable() {
+            const list = paiCurriculum[selectedClass];
+            const tbody = document.getElementById('table-prota-body');
+            tbody.innerHTML = '';
+
+            list.forEach(item => {
+                tbody.innerHTML += `
+                    <tr class="hover:bg-slate-50 border-b border-slate-200">
+                        <td class="border border-slate-300 px-2 py-2 text-center font-bold text-emerald-800">BAB ${item.bab}</td>
+                        <td class="border border-slate-300 px-3 py-2 font-semibold text-slate-800">${item.judul}</td>
+                        <td class="border border-slate-300 px-2 py-2 text-center font-bold text-amber-700">${item.jp} JP</td>
+                        <td class="border border-slate-300 px-3 py-2 text-slate-600">${item.tp}</td>
+                        <td class="border border-slate-300 px-2 py-2 text-center font-bold text-emerald-900">${item.sem}</td>
+                    </tr>
+                `;
+            });
+        }
+
+        // RENDER PROMES
+        function renderPromesTable() {
+            const list = paiCurriculum[selectedClass].filter(i => i.sem === selectedSemester);
+            const tbody = document.getElementById('table-promes-body');
+            tbody.innerHTML = '';
+
+            list.forEach((item, idx) => {
+                tbody.innerHTML += `
+                    <tr class="hover:bg-slate-50 border-b border-slate-200">
+                        <td class="border border-slate-300 px-2 py-2 text-center font-bold">${idx + 1}</td>
+                        <td class="border border-slate-300 px-3 py-2 font-semibold text-slate-800">${item.judul}</td>
+                        <td class="border border-slate-300 px-2 py-2 text-center font-bold text-amber-700">${item.jp} JP</td>
+                        <td class="border border-slate-300 px-1 py-1 text-center font-mono">x x</td>
+                        <td class="border border-slate-300 px-1 py-1 text-center font-mono">x x</td>
+                        <td class="border border-slate-300 px-1 py-1 text-center font-mono">x x</td>
+                        <td class="border border-slate-300 px-1 py-1 text-center font-mono">x x</td>
+                        <td class="border border-slate-300 px-1 py-1 text-center font-mono">x x</td>
+                        <td class="border border-slate-300 px-1 py-1 text-center font-mono">x x</td>
+                    </tr>
+                `;
+            });
+        }
+
+        // RENDER BAB BUTTONS & MODUL
+        function renderBabButtons() {
+            const list = paiCurriculum[selectedClass];
+            const container = document.getElementById('bab-buttons-list');
+            container.innerHTML = '';
+
+            list.forEach(b => {
+                const btn = document.createElement('button');
+                btn.className = `px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition ${selectedBab === b.bab ? 'bg-emerald-800 text-amber-300 shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`;
+                btn.innerText = `BAB ${b.bab}: ${b.judul.substring(0, 20)}...`;
+                btn.onclick = () => {
+                    selectedBab = b.bab;
+                    renderBabButtons();
+                    renderModulAndLkp();
+                };
+                container.appendChild(btn);
+            });
+        }
+
+        function renderModulAndLkp() {
+            const item = paiCurriculum[selectedClass].find(b => b.bab === selectedBab) || paiCurriculum[selectedClass][0];
+            
+            document.getElementById('modul-judul-bab').innerText = `BAB ${item.bab}: ${item.judul}`;
+            document.getElementById('modul-jp').innerText = item.jp;
+            document.getElementById('modul-sekolah').innerText = profile.sekolah;
+            document.getElementById('modul-tp').innerText = item.tp;
+
+            document.getElementById('lkp-judul-bab').innerText = `LKP BAB ${item.bab}: ${item.judul}`;
+            document.getElementById('ai-input-topik').value = `Kelas ${selectedClass} - BAB ${item.bab}: ${item.judul}`;
+        }
+
+        // RENDER REKAP PENILAIAN
+        function renderPenilaianTable() {
+            const tbody = document.getElementById('table-nilai-body');
+            tbody.innerHTML = '';
+
+            studentGrades.forEach((s, idx) => {
+                const nilaiAkhir = Math.round((s.sikap * 0.2) + (s.uh * 0.3) + (s.tugas * 0.25) + (s.praktik * 0.25));
+                let predikat = 'C (Cukup)';
+                if(nilaiAkhir >= 90) predikat = 'A (Sangat Baik)';
+                else if(nilaiAkhir >= 80) predikat = 'B (Baik)';
+
+                tbody.innerHTML += `
+                    <tr class="hover:bg-slate-50 border-b border-slate-200">
+                        <td class="border border-slate-300 px-2 py-2 text-center font-bold">${idx + 1}</td>
+                        <td class="border border-slate-300 px-3 py-2 text-center font-mono">${s.nis}</td>
+                        <td class="border border-slate-300 px-3 py-2 font-semibold text-slate-800">${s.nama}</td>
+                        <td class="border border-slate-300 px-2 py-2 text-center">${s.sikap}</td>
+                        <td class="border border-slate-300 px-2 py-2 text-center">${s.uh}</td>
+                        <td class="border border-slate-300 px-2 py-2 text-center">${s.tugas}</td>
+                        <td class="border border-slate-300 px-2 py-2 text-center">${s.praktik}</td>
+                        <td class="border border-slate-300 px-3 py-2 text-center font-extrabold text-emerald-900 bg-emerald-50">${nilaiAkhir}</td>
+                        <td class="border border-slate-300 px-3 py-2 text-center font-bold text-slate-700">${predikat}</td>
+                    </tr>
+                `;
+            });
+        }
+
+        // GEMINI AI INTEGRATION
+        async function generateExamWithGemini() {
+            const btn = document.getElementById('btn-generate-ai');
+            const outputBox = document.getElementById('ai-soal-output');
+            
+            const topik = document.getElementById('ai-input-topik').value;
+            const jumlahPG = document.getElementById('ai-input-pg').value;
+            const jumlahEssay = document.getElementById('ai-input-essay').value;
+            const tingkat = document.getElementById('ai-input-tingkat').value;
+
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> Gemini Sedang Menyusun Soal...`;
+            outputBox.innerText = "Sedang menghubungi AI Gemini API...";
+
+            const apiKey = ""; // Canvas Runtime Injection
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+
+            const systemPrompt = `Anda adalah pakar penyusun soal PAI & Budi Pekerti Kurikulum Merdeka SMP.
+Buatkan Naskah Ulangan Harian Resmi untuk:
+Sekolah: ${profile.sekolah}
+Mata Pelajaran: PAI dan Budi Pekerti
+Kelas / Topik: ${topik}
+Tingkat Kesulitan: ${tingkat}
+
+Struktur output teks rapi:
+NASKAH ULANGAN HARIAN PAI & BUDI PEKERTI
+${profile.sekolah.toUpperCase()}
+Tahun Ajaran: ${profile.ta}
+
+A. PILIHAN GANDA (${jumlahPG} Soal dengan opsi A, B, C, D)
+B. SOAL ESSAY / URAIAN (${jumlahEssay} Soal)
+C. KUNCI JAWABAN & PEDOMAN PENSKORAN`;
+
+            const payload = {
+                contents: [{ parts: [{ text: `Buatkan soal ulangan PAI topik ${topik}, ${jumlahPG} PG, ${jumlahEssay} Essay.` }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] }
+            };
+
+            try {
+                let delay = 1000;
+                let response = null;
+                for (let attempt = 0; attempt < 3; attempt++) {
+                    try {
+                        response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+                        if (response.ok) break;
+                    } catch (e) {
+                        if (attempt === 2) throw e;
+                    }
+                    await new Promise(res => setTimeout(res, delay));
+                    delay *= 2;
+                }
+
+                if (response && response.ok) {
+                    const data = await response.json();
+                    const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+                    outputBox.innerText = text || "Gagal menghasilkan teks dari AI.";
+                } else {
+                    outputBox.innerText = generateFallbackExamText(topik, jumlahPG, jumlahEssay);
+                }
+            } catch (err) {
+                outputBox.innerText = generateFallbackExamText(topik, jumlahPG, jumlahEssay);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = `<i class="fa-solid fa-sparkles"></i> <span>Generate Naskah Soal Dengan Gemini</span>`;
+            }
+        }
+
+        function generateFallbackExamText(topik, pg, essay) {
+            return `NASKAH ULANGAN HARIAN PAI & BUDI PEKERTI
+${profile.sekolah.toUpperCase()}
+TAHUN AJARAN ${profile.ta}
+
+Mata Pelajaran : PAI & Budi Pekerti
+Materi / Topik : ${topik}
+
+I. PILIHAN GANDA (LATIHAN)
+1. Perintah membaca Al-Qur'an dan menuntut ilmu menegaskan bahwa Allah Swt. akan mengangkat derajat orang yang...
+   a. Berilmu dan Beriman
+   b. Kaya dan Dermawan
+   c. Berkuasa
+   d. Sombong
+
+2. Memahami sifat Asmaulhusna Al-Alim mengajarkan kita untuk selalu...
+   a. Teliti dan haus akan ilmu
+   b. Acuh tak acuh
+   c. Mengabaikan nasehat
+   d. Berbohong
+
+II. ESSAY / URAIAN
+1. Jelaskan 3 hikmah utama dari penerapan materi ${topik} dalam kehidupan siswa sehari-hari!
+2. Sebutkan langkah-langkah nyata untuk membiasakan sikap terpuji di sekolah!
+
+--- KUNCI JAWABAN & PEDOMAN PENSKORAN ---
+PG: 1. A, 2. A
+Essay: 
+1. Meningkatkan ketaqwaan, kedisiplinan, dan kedamaian (Skor Max: 50)
+2. Saling mendoakan, belajar tekun, dan bertabayyun (Skor Max: 50)`;
+        }
+    </script>
+</body>
+</html>
