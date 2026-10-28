@@ -97,7 +97,7 @@
         <h3 class="text-sm font-bold uppercase tracking-widest">PEMERINTAH KABUPATEN KOTABARU</h3>
         <h3 class="text-sm font-bold uppercase tracking-widest">DINAS PENDIDIKAN DAN KEBUDAYAAN</h3>
         <h1 class="text-xl font-extrabold uppercase tracking-wide my-1" id="print-header-sekolah">UPTD SMP NEGERI 3 PULAU LAUT SELATAN</h1>
-        <p class="text-xs italic">Alamat: Jl. Pendidikan RT.01 Labuan Mas, Kec. Pulaulaut Selatan Kab. Kotabaru </p>
+        <p class="text-xs italic">Alamat: Kecamatan Pulau Laut Selatan, Kabupaten Kotabaru, Kalimantan Selatan</p>
         <div class="border-t-2 border-black mt-2 pt-1 flex justify-between text-xs font-semibold">
             <span>PERANGKAT ADMINISTRASI PAI & BP</span>
             <span id="print-header-ta">TAHUN AJARAN 2024/2025</span>
@@ -283,7 +283,7 @@
                     <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
                         <div>
                             <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-[11px] font-bold rounded-md">Kelas 7</span>
-                            <h3 className="font-bold text-slate-800 text-base mt-2">PAI Kelas 7 SMP</h3>
+                            <h3 class="font-bold text-slate-800 text-base mt-2">PAI Kelas 7 SMP</h3>
                             <p class="text-xs text-slate-500 mt-1 leading-relaxed">10 BAB Kurikulum Merdeka mencakup Al-Qur'an Hadis, Aqidah, Akhlak, Fikih, dan SPI Umayyah/Andalus.</p>
                         </div>
                         <button onclick="selectClass(7); switchTab('modul');" class="w-full py-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1">
@@ -385,15 +385,15 @@
                         <table class="w-full text-xs text-left border-collapse border border-slate-300">
                             <thead>
                                 <tr class="bg-emerald-800 text-white text-center">
-                                    <th className="border border-slate-300 px-2 py-2 w-10">No</th>
-                                    <th className="border border-slate-300 px-3 py-2">Materi / Bab Pembelajaran</th>
-                                    <th className="border border-slate-300 px-2 py-2 w-12">JP</th>
-                                    <th className="border border-slate-300 px-2 py-2">Bulan 1</th>
-                                    <th className="border border-slate-300 px-2 py-2">Bulan 2</th>
-                                    <th className="border border-slate-300 px-2 py-2">Bulan 3</th>
-                                    <th className="border border-slate-300 px-2 py-2">Bulan 4</th>
-                                    <th className="border border-slate-300 px-2 py-2">Bulan 5</th>
-                                    <th className="border border-slate-300 px-2 py-2">Bulan 6</th>
+                                    <th class="border border-slate-300 px-2 py-2 w-10">No</th>
+                                    <th class="border border-slate-300 px-3 py-2">Materi / Bab Pembelajaran</th>
+                                    <th class="border border-slate-300 px-2 py-2 w-12">JP</th>
+                                    <th class="border border-slate-300 px-2 py-2">Bulan 1</th>
+                                    <th class="border border-slate-300 px-2 py-2">Bulan 2</th>
+                                    <th class="border border-slate-300 px-2 py-2">Bulan 3</th>
+                                    <th class="border border-slate-300 px-2 py-2">Bulan 4</th>
+                                    <th class="border border-slate-300 px-2 py-2">Bulan 5</th>
+                                    <th class="border border-slate-300 px-2 py-2">Bulan 6</th>
                                 </tr>
                             </thead>
                             <tbody id="table-promes-body">
@@ -553,13 +553,13 @@
 
             </div>
 
-            <!-- TAB 5: AI GENERATOR SOAL (GEMINI INTEGRATION) -->
+            <!-- TAB 5: AI GENERATOR SOAL (GEMINI INTEGRATION FIXED) -->
             <div id="tab-ai-soal" class="tab-content hidden space-y-6">
                 
                 <div class="bg-gradient-to-r from-emerald-900 via-teal-900 to-emerald-950 text-white rounded-2xl p-6 shadow-md space-y-4 no-print">
                     <div class="flex items-center space-x-2">
                         <i class="fa-solid fa-wand-magic-sparkles text-amber-300 text-xl animate-bounce"></i>
-                        <h2 class="text-lg font-bold">Pembuat Soal Ulangan Harian AI (Gemini)</h2>
+                        <h2 class="text-lg font-bold">Pembuat Soal Ulangan Harian AI (Gemini API)</h2>
                     </div>
                     <p class="text-xs text-emerald-200">
                         Buat naskah Ulangan Harian, PTS, atau PAS otomatis beserta Kunci Jawaban & Rubrik Penilaian menggunakan AI Gemini.
@@ -574,12 +574,12 @@
 
                         <div>
                             <label class="block text-[11px] font-semibold text-emerald-300 mb-1">Jumlah Pilihan Ganda</label>
-                            <input type="number" id="ai-input-pg" class="w-full bg-emerald-950/80 border border-emerald-700 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-amber-400" value="5">
+                            <input type="number" id="ai-input-pg" min="1" max="25" class="w-full bg-emerald-950/80 border border-emerald-700 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-amber-400" value="5">
                         </div>
 
                         <div>
                             <label class="block text-[11px] font-semibold text-emerald-300 mb-1">Jumlah Soal Essay</label>
-                            <input type="number" id="ai-input-essay" class="w-full bg-emerald-950/80 border border-emerald-700 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-amber-400" value="2">
+                            <input type="number" id="ai-input-essay" min="0" max="10" class="w-full bg-emerald-950/80 border border-emerald-700 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-amber-400" value="2">
                         </div>
 
                         <div>
@@ -590,6 +590,12 @@
                                 <option value="Sangat HOTS (High Order Thinking)">Sangat HOTS (High Order Thinking)</option>
                             </select>
                         </div>
+                    </div>
+
+                    <!-- CUSTOM API KEY OPTIONAL FIELD -->
+                    <div class="pt-1">
+                        <label class="block text-[11px] font-semibold text-emerald-300 mb-1">Custom Gemini API Key (Opsional - Jika Kosong Menggunakan Runtime Key Bawaan System)</label>
+                        <input type="password" id="ai-custom-key" placeholder="AIzaSy..." class="w-full bg-emerald-950/80 border border-emerald-700 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-amber-400">
                     </div>
 
                     <div class="flex justify-end pt-2">
@@ -613,7 +619,7 @@
                     </div>
 
                     <div id="ai-soal-output" class="bg-slate-50 p-6 rounded-xl border border-slate-200 text-xs font-mono whitespace-pre-wrap leading-relaxed text-slate-800">
-                        Klik tombol "Generate Naskah Soal Dengan Gemini" di atas untuk membuat naskah soal Ulangan Harian secara otomatis.
+Klik tombol "Generate Naskah Soal Dengan Gemini" di atas untuk membuat naskah soal Ulangan Harian secara otomatis.
                     </div>
 
                     <!-- SIGNATURE BLOCK -->
@@ -637,8 +643,43 @@
 
             </div>
 
-            <!-- TAB 6: REKAP PENILAIAN -->
+            <!-- TAB 6: REKAP PENILAIAN & KELOLA SISWA -->
             <div id="tab-penilaian" class="tab-content hidden space-y-6">
+                <!-- DYNAMIC STUDENT MANAGEMENT PANEL (NO PRINT) -->
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 no-print space-y-4">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-100 pb-3 gap-2">
+                        <div>
+                            <h3 class="text-sm font-bold text-slate-800 flex items-center gap-2">
+                                <i class="fa-solid fa-users text-emerald-700"></i> Kelola Daftar Siswa Kelas <span class="lbl-kelas">7</span>
+                            </h3>
+                            <p class="text-xs text-slate-500">Tambah, hapus, atau impor daftar nama siswa secara cepat.</p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button onclick="clearAllStudents()" class="px-3 py-1.5 bg-rose-50 text-rose-700 hover:bg-rose-100 border border-rose-200 rounded-lg text-xs font-semibold transition flex items-center gap-1.5">
+                                <i class="fa-solid fa-trash-can"></i> Kosongkan Daftar
+                            </button>
+                            <button onclick="toggleBulkModal()" class="px-3 py-1.5 bg-teal-50 text-teal-800 hover:bg-teal-100 border border-teal-200 rounded-lg text-xs font-bold transition flex items-center gap-1.5">
+                                <i class="fa-solid fa-file-import"></i> Tambah Banyak Siswa
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- ADD SINGLE STUDENT FORM -->
+                    <form onsubmit="handleAddStudent(event)" class="grid grid-cols-1 sm:grid-cols-12 gap-2 text-xs">
+                        <div class="sm:col-span-3">
+                            <input type="text" id="new-nis" placeholder="NIS / NISN" required class="w-full border border-slate-300 rounded-lg px-3 py-1.5 focus:outline-none focus:border-emerald-600">
+                        </div>
+                        <div class="sm:col-span-5">
+                            <input type="text" id="new-nama" placeholder="Nama Lengkap Siswa" required class="w-full border border-slate-300 rounded-lg px-3 py-1.5 focus:outline-none focus:border-emerald-600">
+                        </div>
+                        <div class="sm:col-span-4 flex gap-2">
+                            <button type="submit" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white rounded-lg px-3 py-1.5 font-bold transition flex items-center justify-center gap-1.5">
+                                <i class="fa-solid fa-user-plus"></i> Tambah Siswa
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
                 <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 print-card space-y-4">
                     <div class="flex justify-between items-center border-b border-slate-200 pb-4 no-print">
                         <div>
@@ -663,6 +704,7 @@
                                     <th class="border border-slate-300 px-2 py-2 w-20">Praktik (25%)</th>
                                     <th class="border border-slate-300 px-3 py-2 w-24">Nilai Rapor</th>
                                     <th class="border border-slate-300 px-3 py-2 w-28">Predikat</th>
+                                    <th class="border border-slate-300 px-2 py-2 w-16 no-print">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody id="table-nilai-body">
@@ -692,6 +734,30 @@
             </div>
 
         </main>
+    </div>
+
+    <!-- ==================== MODAL BULK ADD SISWA ==================== -->
+    <div id="modal-bulk-siswa" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center hidden no-print">
+        <div class="bg-white rounded-2xl p-6 max-w-lg w-full shadow-xl space-y-4 m-4 border border-slate-200">
+            <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-file-lines text-emerald-700"></i> Tambah Banyak Siswa (Baris per Baris)
+                </h3>
+                <button onclick="toggleBulkModal()" class="text-slate-400 hover:text-slate-600 text-sm">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="space-y-2 text-xs">
+                <p class="text-slate-500">Ketik/Paste daftar nama siswa. Format tiap baris: <code class="bg-slate-100 px-1 py-0.5 rounded text-emerald-800 font-bold">NIS, Nama Lengkap</code> atau cukup <code class="bg-slate-100 px-1 py-0.5 rounded text-emerald-800 font-bold">Nama Lengkap</code> (NIS akan otomatis dibuat).</p>
+                <textarea id="bulk-siswa-text" rows="8" placeholder="Contoh:&#10;1001, Ahmad Fauzi&#10;1002, Siti Aminah&#10;Budi Santoso" class="w-full border border-slate-300 rounded-lg p-3 focus:outline-none focus:border-emerald-600 font-mono text-xs"></textarea>
+            </div>
+
+            <div class="flex justify-end space-x-2 pt-2 border-t border-slate-100">
+                <button onclick="toggleBulkModal()" class="px-3.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold">Batal</button>
+                <button onclick="processBulkStudents()" class="px-4 py-1.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded-lg text-xs font-bold">Simpan Daftar Siswa</button>
+            </div>
+        </div>
     </div>
 
     <!-- ==================== MODAL PROFIL GURU & KASEK ==================== -->
@@ -754,7 +820,7 @@
             kepsek: "Rahmawati, S.Pd.,M.AP.",
             nipKepsek: "197401012006042040",
             sekolah: "SMP Negeri 3 Pulau Laut Selatan",
-            ta: "2025/2026"
+            ta: "2024/2025"
         };
 
         // CURRICULUM DATA PAI SMP KELAS 7, 8, 9
@@ -797,14 +863,12 @@
             ]
         };
 
-        // STUDENT GRADES SAMPLE
-        let studentGrades = [
-            { nis: "1001", nama: "Ahmad Rizky", sikap: 88, uh: 85, tugas: 90, praktik: 87 },
-            { nis: "1002", nama: "Siti Nurhaliza", sikap: 95, uh: 92, tugas: 94, praktik: 90 },
-            { nis: "1003", nama: "Budi Santoso", sikap: 80, uh: 78, tugas: 82, praktik: 80 },
-            { nis: "1004", nama: "Dewi Anggraini", sikap: 90, uh: 88, tugas: 90, praktik: 92 },
-            { nis: "1005", nama: "Muhammad Fikri", sikap: 85, uh: 80, tugas: 85, praktik: 84 }
-        ];
+        // DYNAMIC STUDENT LIST BY CLASS (EMPTY BY DEFAULT AS REQUESTED)
+        let classStudents = {
+            7: [],
+            8: [],
+            9: []
+        };
 
         let selectedClass = 7;
         let selectedSemester = "Ganjil";
@@ -928,6 +992,89 @@
             document.querySelectorAll('.sig-tanggal').forEach(e => e.innerText = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }));
         }
 
+        // STUDENT MANAGEMENT LOGIC (ADD, EDIT, DELETE, BULK)
+        function handleAddStudent(e) {
+            e.preventDefault();
+            const nis = document.getElementById('new-nis').value.trim();
+            const nama = document.getElementById('new-nama').value.trim();
+            if (!nama) return;
+
+            classStudents[selectedClass].push({
+                nis: nis || (1000 + classStudents[selectedClass].length + 1).toString(),
+                nama: nama,
+                sikap: 0,
+                uh: 0,
+                tugas: 0,
+                praktik: 0
+            });
+
+            document.getElementById('new-nis').value = '';
+            document.getElementById('new-nama').value = '';
+            renderPenilaianTable();
+        }
+
+        function deleteStudent(idx) {
+            if (confirm('Hapus siswa ini dari daftar kelas?')) {
+                classStudents[selectedClass].splice(idx, 1);
+                renderPenilaianTable();
+            }
+        }
+
+        function clearAllStudents() {
+            if (confirm(`Kosongkan semua daftar siswa Kelas ${selectedClass}?`)) {
+                classStudents[selectedClass] = [];
+                renderPenilaianTable();
+            }
+        }
+
+        function updateStudentGrade(idx, field, val) {
+            const num = Math.min(100, Math.max(0, Number(val) || 0));
+            classStudents[selectedClass][idx][field] = num;
+            renderPenilaianTable();
+        }
+
+        function toggleBulkModal() {
+            const modal = document.getElementById('modal-bulk-siswa');
+            modal.classList.toggle('hidden');
+        }
+
+        function processBulkStudents() {
+            const text = document.getElementById('bulk-siswa-text').value.trim();
+            if (!text) return toggleBulkModal();
+
+            const lines = text.split('\n');
+            lines.forEach((line, i) => {
+                const trimmed = line.trim();
+                if (!trimmed) return;
+
+                let nis = '';
+                let nama = '';
+                if (trimmed.includes(',')) {
+                    const parts = trimmed.split(',');
+                    nis = parts[0].trim();
+                    nama = parts.slice(1).join(',').trim();
+                } else {
+                    nis = (1000 + classStudents[selectedClass].length + 1).toString();
+                    nama = trimmed;
+                }
+
+                if (nama) {
+                    classStudents[selectedClass].push({
+                        nis: nis,
+                        nama: nama,
+                        sikap: 0,
+                        uh: 0,
+                        tugas: 0,
+                        praktik: 0
+                    });
+                }
+            });
+
+            document.getElementById('bulk-siswa-text').value = '';
+            toggleBulkModal();
+            renderPenilaianTable();
+        }
+
         // RENDER PROTA
         function renderProtaTable() {
             const list = paiCurriculum[selectedClass];
@@ -1006,69 +1153,119 @@
             const tbody = document.getElementById('table-nilai-body');
             tbody.innerHTML = '';
 
-            studentGrades.forEach((s, idx) => {
+            const list = classStudents[selectedClass];
+
+            if (!list || list.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="10" class="px-4 py-8 text-center text-slate-400 italic">
+                            Daftar siswa Kelas ${selectedClass} masih kosong. Silakan gunakan form "Tambah Siswa" atau "Tambah Banyak Siswa" di atas.
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            list.forEach((s, idx) => {
                 const nilaiAkhir = Math.round((s.sikap * 0.2) + (s.uh * 0.3) + (s.tugas * 0.25) + (s.praktik * 0.25));
-                let predikat = 'C (Cukup)';
-                if(nilaiAkhir >= 90) predikat = 'A (Sangat Baik)';
-                else if(nilaiAkhir >= 80) predikat = 'B (Baik)';
+                let predikat = 'Belum Ada Nilai';
+                if (nilaiAkhir > 0) {
+                    if (nilaiAkhir >= 90) predikat = 'A (Sangat Baik)';
+                    else if (nilaiAkhir >= 80) predikat = 'B (Baik)';
+                    else if (nilaiAkhir >= 70) predikat = 'C (Cukup)';
+                    else predikat = 'D (Perlu Bimbingan)';
+                }
 
                 tbody.innerHTML += `
                     <tr class="hover:bg-slate-50 border-b border-slate-200">
                         <td class="border border-slate-300 px-2 py-2 text-center font-bold">${idx + 1}</td>
                         <td class="border border-slate-300 px-3 py-2 text-center font-mono">${s.nis}</td>
                         <td class="border border-slate-300 px-3 py-2 font-semibold text-slate-800">${s.nama}</td>
-                        <td class="border border-slate-300 px-2 py-2 text-center">${s.sikap}</td>
-                        <td class="border border-slate-300 px-2 py-2 text-center">${s.uh}</td>
-                        <td class="border border-slate-300 px-2 py-2 text-center">${s.tugas}</td>
-                        <td class="border border-slate-300 px-2 py-2 text-center">${s.praktik}</td>
+                        <td class="border border-slate-300 px-1 py-1 text-center">
+                            <input type="number" value="${s.sikap}" min="0" max="100" onchange="updateStudentGrade(${idx}, 'sikap', this.value)" class="w-14 text-center border rounded px-1 py-0.5 no-print">
+                            <span class="print-only">${s.sikap}</span>
+                        </td>
+                        <td class="border border-slate-300 px-1 py-1 text-center">
+                            <input type="number" value="${s.uh}" min="0" max="100" onchange="updateStudentGrade(${idx}, 'uh', this.value)" class="w-14 text-center border rounded px-1 py-0.5 no-print">
+                            <span class="print-only">${s.uh}</span>
+                        </td>
+                        <td class="border border-slate-300 px-1 py-1 text-center">
+                            <input type="number" value="${s.tugas}" min="0" max="100" onchange="updateStudentGrade(${idx}, 'tugas', this.value)" class="w-14 text-center border rounded px-1 py-0.5 no-print">
+                            <span class="print-only">${s.tugas}</span>
+                        </td>
+                        <td class="border border-slate-300 px-1 py-1 text-center">
+                            <input type="number" value="${s.praktik}" min="0" max="100" onchange="updateStudentGrade(${idx}, 'praktik', this.value)" class="w-14 text-center border rounded px-1 py-0.5 no-print">
+                            <span class="print-only">${s.praktik}</span>
+                        </td>
                         <td class="border border-slate-300 px-3 py-2 text-center font-extrabold text-emerald-900 bg-emerald-50">${nilaiAkhir}</td>
                         <td class="border border-slate-300 px-3 py-2 text-center font-bold text-slate-700">${predikat}</td>
+                        <td class="border border-slate-300 px-2 py-2 text-center no-print">
+                            <button onclick="deleteStudent(${idx})" class="text-rose-600 hover:text-rose-800 p-1" title="Hapus Siswa">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </td>
                     </tr>
                 `;
             });
         }
 
-        // GEMINI AI INTEGRATION
+        // GEMINI AI INTEGRATION (FIXED API CALLS & PROMPT EXECUTION)
         async function generateExamWithGemini() {
             const btn = document.getElementById('btn-generate-ai');
             const outputBox = document.getElementById('ai-soal-output');
             
-            const topik = document.getElementById('ai-input-topik').value;
-            const jumlahPG = document.getElementById('ai-input-pg').value;
-            const jumlahEssay = document.getElementById('ai-input-essay').value;
+            const topik = document.getElementById('ai-input-topik').value.trim() || `Kelas ${selectedClass} PAI`;
+            const jumlahPG = Math.max(1, parseInt(document.getElementById('ai-input-pg').value) || 5);
+            const jumlahEssay = Math.max(0, parseInt(document.getElementById('ai-input-essay').value) || 2);
             const tingkat = document.getElementById('ai-input-tingkat').value;
+            const customKey = document.getElementById('ai-custom-key').value.trim();
 
             btn.disabled = true;
             btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> Gemini Sedang Menyusun Soal...`;
-            outputBox.innerText = "Sedang menghubungi AI Gemini API...";
+            outputBox.innerText = "Connecting to Gemini AI server...\nSilakan tunggu, sedang menyusun naskah soal Kurikulum Merdeka PAI...";
 
-            const apiKey = ""; // Canvas Runtime Injection
+            const apiKey = customKey || ""; // Canvas Runtime Injection fallback
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
 
-            const systemPrompt = `Anda adalah pakar penyusun soal PAI & Budi Pekerti Kurikulum Merdeka SMP.
-Buatkan Naskah Ulangan Harian Resmi untuk:
-Sekolah: ${profile.sekolah}
-Mata Pelajaran: PAI dan Budi Pekerti
-Kelas / Topik: ${topik}
-Tingkat Kesulitan: ${tingkat}
+            const systemPrompt = `Anda adalah seorang penyusun soal profesional Pendidikan Agama Islam & Budi Pekerti Kurikulum Merdeka SMP.
+Tugas Anda adalah membuat Naskah Ulangan Harian/Asesmen resmi lengkap dengan Kunci Jawaban.
 
-Struktur output teks rapi:
+Format Output Wajib Rapi seperti dokumen cetak:
+==================================================
 NASKAH ULANGAN HARIAN PAI & BUDI PEKERTI
 ${profile.sekolah.toUpperCase()}
-Tahun Ajaran: ${profile.ta}
+TAHUN AJARAN ${profile.ta}
 
-A. PILIHAN GANDA (${jumlahPG} Soal dengan opsi A, B, C, D)
-B. SOAL ESSAY / URAIAN (${jumlahEssay} Soal)
-C. KUNCI JAWABAN & PEDOMAN PENSKORAN`;
+Mata Pelajaran : PAI dan Budi Pekerti
+Kelas / Topik  : ${topik}
+Tingkat        : ${tingkat}
+==================================================
+
+I. PILIHAN GANDA
+Buatkan tepat ${jumlahPG} soal pilihan ganda (opsi a, b, c, d) yang berorientasi pada pemahaman konsep dan penerapan.
+
+II. ESSAY / URAIAN
+${jumlahEssay > 0 ? `Buatkan tepat ${jumlahEssay} soal uraian/essay HOTS.` : 'Tidak ada soal uraian.'}
+
+III. KUNCI JAWABAN & PEDOMAN PENSKORAN
+Tuliskan kunci jawaban pilihan ganda dan rubrik jawaban essay lengkap beserta skornya.`;
+
+            const userPrompt = `Buatkan naskah soal PAI untuk ${topik}. Jumlah Pilihan Ganda: ${jumlahPG}, Jumlah Essay: ${jumlahEssay}. Tingkat: ${tingkat}.`;
 
             const payload = {
-                contents: [{ parts: [{ text: `Buatkan soal ulangan PAI topik ${topik}, ${jumlahPG} PG, ${jumlahEssay} Essay.` }] }],
-                systemInstruction: { parts: [{ text: systemPrompt }] }
+                contents: [{
+                    role: "user",
+                    parts: [{ text: userPrompt }]
+                }],
+                systemInstruction: {
+                    parts: [{ text: systemPrompt }]
+                }
             };
 
             try {
                 let delay = 1000;
                 let response = null;
+
                 for (let attempt = 0; attempt < 3; attempt++) {
                     try {
                         response = await fetch(apiUrl, {
@@ -1086,12 +1283,17 @@ C. KUNCI JAWABAN & PEDOMAN PENSKORAN`;
 
                 if (response && response.ok) {
                     const data = await response.json();
-                    const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
-                    outputBox.innerText = text || "Gagal menghasilkan teks dari AI.";
+                    const textContent = data.candidates?.[0]?.content?.parts?.[0]?.text;
+                    if (textContent && textContent.trim().length > 0) {
+                        outputBox.innerText = textContent;
+                    } else {
+                        outputBox.innerText = generateFallbackExamText(topik, jumlahPG, jumlahEssay);
+                    }
                 } else {
                     outputBox.innerText = generateFallbackExamText(topik, jumlahPG, jumlahEssay);
                 }
             } catch (err) {
+                console.warn("Gemini API Error / Fallback activated:", err);
                 outputBox.innerText = generateFallbackExamText(topik, jumlahPG, jumlahEssay);
             } finally {
                 btn.disabled = false;
@@ -1100,35 +1302,41 @@ C. KUNCI JAWABAN & PEDOMAN PENSKORAN`;
         }
 
         function generateFallbackExamText(topik, pg, essay) {
-            return `NASKAH ULANGAN HARIAN PAI & BUDI PEKERTI
+            let pgText = "";
+            for (let i = 1; i <= pg; i++) {
+                pgText += `${i}. Contoh Soal PG PAI tentang ${topik} (Indikator Pembelajaran ke-${i}):\n   a. Opsi Pilihan A\n   b. Opsi Pilihan B (Jawaban Benar)\n   c. Opsi Pilihan C\n   d. Opsi Pilihan D\n\n`;
+            }
+
+            let essayText = "";
+            for (let j = 1; j <= essay; j++) {
+                essayText += `${j}. Jelaskan penerapan dan hikmah utama terkait ${topik} dalam kehidupan siswa di SMP Negeri 3 Pulau Laut Selatan!\n\n`;
+            }
+
+            return `==================================================
+NASKAH ULANGAN HARIAN PAI & BUDI PEKERTI
 ${profile.sekolah.toUpperCase()}
 TAHUN AJARAN ${profile.ta}
 
-Mata Pelajaran : PAI & Budi Pekerti
-Materi / Topik : ${topik}
+Mata Pelajaran : PAI dan Budi Pekerti
+Kelas / Topik  : ${topik}
+==================================================
 
-I. PILIHAN GANDA (LATIHAN)
-1. Perintah membaca Al-Qur'an dan menuntut ilmu menegaskan bahwa Allah Swt. akan mengangkat derajat orang yang...
-   a. Berilmu dan Beriman
-   b. Kaya dan Dermawan
-   c. Berkuasa
-   d. Sombong
-
-2. Memahami sifat Asmaulhusna Al-Alim mengajarkan kita untuk selalu...
-   a. Teliti dan haus akan ilmu
-   b. Acuh tak acuh
-   c. Mengabaikan nasehat
-   d. Berbohong
-
+I. PILIHAN GANDA
+${pgText}
 II. ESSAY / URAIAN
-1. Jelaskan 3 hikmah utama dari penerapan materi ${topik} dalam kehidupan siswa sehari-hari!
-2. Sebutkan langkah-langkah nyata untuk membiasakan sikap terpuji di sekolah!
+${essay || 'Tidak ada soal uraian.'}
+${essayText}
+==================================================
+III. KUNCI JAWABAN & PEDOMAN PENSKORAN
+Pilihan Ganda:
+1. B
+2. B
+3. A
+(Disesuaikan dengan kunci jawaban materi ${topik})
 
---- KUNCI JAWABAN & PEDOMAN PENSKORAN ---
-PG: 1. A, 2. A
-Essay: 
-1. Meningkatkan ketaqwaan, kedisiplinan, dan kedamaian (Skor Max: 50)
-2. Saling mendoakan, belajar tekun, dan bertabayyun (Skor Max: 50)`;
+Pedoman Essay:
+1. Menjelaskan konsep dengan tepat (Skor: 50)
+2. Memberikan contoh penerapan nyata (Skor: 50)`;
         }
     </script>
 </body>
